@@ -1,25 +1,32 @@
-import Image from "next/image";
-
-async function loader(){
-
-  const path = "/api/global";
-  const baseUrl = "http://localhost:1337";
-
-  const url = new URL(path, baseUrl);
-  const response = await fetch(url.href);
-  const data = await response.json();
-
-  console.log(data)
-  return {...data.data};
-
-}
+import Link from "next/link";
 
 export default async function Home() {
-  const data = await loader();
-  console.log(data)
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-900 p-6">
+      {/* Title */}
+      <h1 className="text-3xl sm:text-4xl font-semibold mb-4">
+        Email & Password Authentication in Next.js & Strapi
+      </h1>
 
-  return <div>
-    <h1>{data.topNav.logo.lable}</h1>
-    <h1>fkdadjfkdk</h1>
-  </div>
+      {/* Subtitle */}
+      <p className="text-center text-lg text-gray-600 max-w-xl">
+        Learn how to implement a secure authentication flow using Next.js and
+        Strapi. Start by signing in or creating an account.
+      </p>
+
+      {/* Buttons */}
+      <div className="mt-6 flex space-x-4">
+        <Link href="/auth/login">
+          <button className="px-6 py-3 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 transition">
+            Sign In
+          </button>
+        </Link>
+        <Link href="/auth/signup">
+          <button className="cursor-pointer px-6 py-3 text-blue-500 border border-blue-500 rounded-lg shadow-md hover:bg-blue-50 transition">
+            Sign Up
+          </button>
+        </Link>
+      </div>
+    </div>
+  );
 }
